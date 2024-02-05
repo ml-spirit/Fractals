@@ -24,6 +24,23 @@ namespace Fractals
             graphics.FillEllipse(new SolidBrush(color), x, y, radius, radius);
         }
 
+
+        //функція яка малює ромб
+        private void DrawRomb(Graphics graphics, int x, int y, int radius, Color color)
+        {
+            var context = new Point[4];
+            context[0].X = x - radius;
+            context[0].Y = y;
+            context[1].X = x;
+            context[1].Y = y - radius;
+            context[2].X = x + radius;
+            context[2].Y = y;
+            context[3].X = x;
+            context[3].Y = y + radius;
+            graphics.DrawPolygon(new Pen(color), context);
+            graphics.FillPolygon(new SolidBrush(color), context);
+        }
+
         //функція яка малює прямокутник
         private void DrawRect(Graphics graphics, int x, int y, int width, int height, Color color)
         {
@@ -69,6 +86,11 @@ namespace Fractals
                     x + offsetX * deltaX + radius * 5,
                     y + offsetY * deltaY + radius * 3,
                     color);
+            }
+            if (shape.SelectedIndex == 3)
+            {
+                DrawRomb(graphics, x + offsetX * deltaX, y + offsetY * deltaY, radius, color);
+                return;
             }
         }
 
